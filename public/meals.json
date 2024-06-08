@@ -1,0 +1,75 @@
+ [
+      {
+        "id": 1,
+        "title": "Spaghetti Carbonara",
+        "category": "Dinner",
+        "image": "https://example.com/images/spaghetti.jpg",
+        "ingredients": "Spaghetti, eggs, pancetta, Parmesan cheese, black pepper",
+        "description": "A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper.",
+        "price": "12.99",
+        "rating": 4.5,
+        "postTime": "2023-06-01T10:30:00Z",
+        "likes": 150,
+        "reviews": [
+          {
+            "user": "John Doe",
+            "comment": "Delicious and creamy!",
+            "rating": 5
+          },
+          {
+            "user": "Jane Smith",
+            "comment": "Could use a bit more salt, but otherwise great.",
+            "rating": 4
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Vegetable Stir Fry",
+        "category": "Lunch",
+        "image": "https://example.com/images/veg-stir-fry.jpg",
+        "ingredients": "Broccoli, bell peppers, carrots, soy sauce, garlic, ginger",
+        "description": "A healthy and colorful mix of vegetables stir-fried in a savory sauce.",
+        "price": "9.99",
+        "rating": 4.0,
+        "postTime": "2023-06-02T12:00:00Z",
+        "likes": 120,
+        "reviews": [
+          {
+            "user": "Alice Johnson",
+            "comment": "Very fresh and tasty!",
+            "rating": 4
+          },
+          {
+            "user": "Bob Brown",
+            "comment": "Good, but a bit too spicy for me.",
+            "rating": 3
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Chicken Caesar Salad",
+        "category": "Lunch",
+        "image": "https://example.com/images/caesar-salad.jpg",
+        "ingredients": "Romaine lettuce, grilled chicken, croutons, Caesar dressing, Parmesan cheese",
+        "description": "A classic Caesar salad topped with grilled chicken for a satisfying meal.",
+        "price": "10.99",
+        "rating": 4.7,
+        "postTime": "2023-06-03T11:30:00Z",
+        "likes": 180,
+        "reviews": [
+          {
+            "user": "Carol White",
+            "comment": "One of the best Caesar salads I've had!",
+            "rating": 5
+          },
+          {
+            "user": "Dave Green",
+            "comment": "Fresh and delicious, but the dressing was a bit heavy.",
+            "rating": 4
+          }
+        ]
+      }
+    ]
+  
