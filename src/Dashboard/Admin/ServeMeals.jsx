@@ -24,26 +24,37 @@ const ServeMeals = () => {
   }, [search]);
 
   const handleServe = async (id) => {
+    console.log(`Serving meal request with id: ${id}`); // Debug log
     try {
       const response = await fetch(`http://localhost:5000/serveMeals/${id}/delivered`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include authorization header if needed
         },
       });
+  
+      const responseBody = await response.json();
+  
       if (!response.ok) {
+        console.error(`Response status: ${response.status}`);
+        console.error(`Response body: ${JSON.stringify(responseBody)}`);
         throw new Error('Failed to update meal request status');
       }
-      const updatedRequest = await response.json();
-      setMealRequests((prevRequests) =>
-        prevRequests.map((request) =>
-          request._id === updatedRequest._id ? updatedRequest : request
-        )
-      );
+  
+      console.log('Updated request:', responseBody); // Debug log
+      setMealRequests((prevRequests) => {
+        const updatedRequests = prevRequests.map((request) =>
+          request._id === responseBody._id ? responseBody : request
+        );
+        console.log('Updated meal requests:', updatedRequests); // Debug log
+        return updatedRequests;
+      });
     } catch (error) {
       console.error('Error updating meal request status:', error);
     }
   };
+  
 
   return (
     <div className="container mx-auto mt-16">

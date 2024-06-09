@@ -1,11 +1,11 @@
-import  { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { FaThumbsUp, FaHeart } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const MealDetail = () => {
   const { user } = useContext(AuthContext);
-  const { _id } = useParams();
+  const { id } = useParams();
   const [meal, setMeal] = useState(null);
   const [likeCount, setLikeCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -19,7 +19,7 @@ const MealDetail = () => {
   useEffect(() => {
     const fetchMeal = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/meals/${_id}`);
+        const response = await fetch(`http://localhost:5000/meals/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch meal");
         }
@@ -35,10 +35,10 @@ const MealDetail = () => {
       }
     };
 
-    if (_id) {
+    if (id) {
       fetchMeal();
     }
-  }, [_id]);
+  }, [id]);
 
   const handleLike = () => {
     if (!user) {
@@ -72,7 +72,12 @@ const MealDetail = () => {
 
     if (review.trim() === "") return;
 
-    const newReview = { text: review, user: user.name };
+    const newReview = {
+      text: review,
+      userId: user._id,
+      userEmail: user.email,
+      userName: user.name,
+    };
 
     try {
       const response = await fetch(`http://localhost:5000/meals/${meal._id}/reviews`, {
@@ -171,7 +176,7 @@ const MealDetail = () => {
                 ) : (
                   <ul>
                     {Array.isArray(reviews) && reviews.map((review, index) => (
-                      <li key={index}>{review.text} - {review.user}</li>
+                      <li key={index}>{review.text} - {review.userName}</li>
                     ))}
                   </ul>
                 )}
@@ -217,4 +222,3 @@ const MealDetail = () => {
 };
 
 export default MealDetail;
-
