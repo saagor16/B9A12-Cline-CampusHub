@@ -6,7 +6,8 @@ import useUpMeals from "../../Hooks/useUpMeals";
 const UpcomingMeals = () => {
   const { user } = useAuth();
   const [upMeals] = useUpMeals();
-  const [payment] = usePayment();
+  const paymentData = usePayment();
+  console.log(paymentData)
 
   const handleLike = async (mealId) => {
     try {
@@ -15,8 +16,7 @@ const UpcomingMeals = () => {
         return;
       }
 
-      const matchingEmail = payment.find((payment) => payment.email === user.email);
-      if (!matchingEmail) {
+      if (!paymentData || !paymentData.email || paymentData.email !== user.email) {
         console.log("Only premium users with matching payment email can like this meal.");
         return;
       }

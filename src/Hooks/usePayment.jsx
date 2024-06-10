@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 
 const usePayment = () => {
-    const [payment, setPayment] = useState([]);
+    const [paymentData, setPaymentData] = useState({});
 
     useEffect(() => {
-      // Fetch meals data from an API or local data
-      fetch('http://localhost:5000/payments') // Adjust the URL to your data source
-        .then(response => response.json())
-        .then(data => setPayment(data))
-        .catch(error => console.error('Error fetching meals:', error));
+        // Fetch payment data from an API or local data
+        fetch('http://localhost:5000/payments') // Adjust the URL to your data source
+            .then(response => response.json())
+            .then(data => {
+                setPaymentData(data);
+            })
+            .catch(error => console.error('Error fetching payment data:', error));
     }, []);
   
-    return [payment];
+    return paymentData;
 };
 
 export default usePayment;
