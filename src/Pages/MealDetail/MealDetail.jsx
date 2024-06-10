@@ -12,29 +12,29 @@ const MealDetail = () => {
   const [review, setReview] = useState("");
   const [reviews, setReviews] = useState([]);
   const [requestSubmitted, setRequestSubmitted] = useState(false);
-  const [loading, setLoading] = useState(true);
-  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
+
+
 
   useEffect(() => {
     const fetchMeal = async () => {
       try {
+        console.log(`Fetching meal with id: ${id}`);
         const response = await fetch(`http://localhost:5000/meals/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch meal");
         }
         const data = await response.json();
+        console.log("Fetched meal data:", data);
         setMeal(data);
         setLikeCount(data.likes || 0);
         setReviews(data.reviews || []);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching meal data:", error);
         setError("Failed to fetch meal data");
-        setLoading(false);
       }
     };
-
+  
     if (id) {
       fetchMeal();
     }
@@ -119,8 +119,9 @@ const MealDetail = () => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>; // Show loading state while fetching data
+ 
+  if (error) {
+    return <div>{error}</div>; // Show error message
   }
 
   if (!meal) {
