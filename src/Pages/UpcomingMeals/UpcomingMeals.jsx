@@ -7,7 +7,6 @@ const UpcomingMeals = () => {
   const { user } = useAuth();
   const [upMeals] = useUpMeals();
   const paymentData = usePayment();
-  console.log(paymentData)
 
   const handleLike = async (mealId) => {
     try {

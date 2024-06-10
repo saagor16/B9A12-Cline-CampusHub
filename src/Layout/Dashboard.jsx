@@ -57,10 +57,11 @@ const Dashboard = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/upcomingMeals">
+                                    <NavLink to="/dashboard/upAdmin">
                                         <FaClock /> Upcoming Meals
                                     </NavLink>
                                 </li>
+                               
                             </>
                         ) : (
                             <>

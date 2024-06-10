@@ -21,6 +21,7 @@ import ServeMeals from "../Dashboard/Admin/ServeMeals";
 import PrivateRoute from "../Pages/PrivateRoute/PrivateRoute";
 import AllUsers from "../Dashboard/Admin/AllUsers";
 import Payment from "../Payment/Payment";
+import UpAdminMeals from "../Dashboard/Admin/UpAdminMeals";
 
 export const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ export const router = createBrowserRouter([
           {
             path: "allUser",
             element: <AllUsers />,
+          },
+          {
+            path: "upAdmin",
+            element:<UpAdminMeals></UpAdminMeals>,
           },
         ],
       },
