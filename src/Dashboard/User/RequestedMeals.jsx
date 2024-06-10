@@ -12,14 +12,14 @@ const RequestedMeals = () => {
     const { data: meals = [], refetch } = useQuery({
         queryKey: ['requestedMeals', user.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/requested-meals/${user.email}`);
+            const res = await axiosSecure.get(`/requestedMeals/${user.email}`);
             return res.data;
         }
     });
 
     const cancelMutation = useMutation({
         mutationFn: async (id) => {
-            await axiosSecure.delete(`/requested-meals/${id}`);
+            await axiosSecure.delete(`/requestedMeals/${id}`);
         },
         onSuccess: () => {
             queryClient.invalidateQueries(['requestedMeals', user.email]);
