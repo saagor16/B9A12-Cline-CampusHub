@@ -1,62 +1,49 @@
-import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useState,  useContext } from "react";
 import { FaThumbsUp, FaHeart } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
+import useMeals from "../../Hooks/useMeals";
+import { useParams } from "react-router-dom";
 
 const MealDetail = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
-  const [meal, setMeal] = useState(null);
+  const meal = useMeals(id); 
   const [likeCount, setLikeCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [review, setReview] = useState("");
   const [reviews, setReviews] = useState([]);
   const [requestSubmitted, setRequestSubmitted] = useState(false);
-  const [error, setError] = useState(null);
 
 
+  console.log(meal)
 
-  useEffect(() => {
-    const fetchMeal = async () => {
-      try {
-        console.log(`Fetching meal with id: ${id}`);
-        const response = await fetch(`http://localhost:5000/meals/${id}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch meal");
-        }
-        const data = await response.json();
-        console.log("Fetched meal data:", data);
-        setMeal(data);
-        setLikeCount(data.likes || 0);
-        setReviews(data.reviews || []);
-      } catch (error) {
-        console.error("Error fetching meal data:", error);
-        setError("Failed to fetch meal data");
-      }
-    };
-  
-    if (id) {
-      fetchMeal();
-    }
-  }, [id]);
-
-  const handleLike = () => {
+  const handleLike = async () => {
     if (!user) {
       alert("Please login to like the meal.");
       return;
     }
 
     const newLikeStatus = !isLiked;
-    setLikeCount(newLikeStatus ? likeCount + 1 : likeCount - 1);
+    setLikeCount((prevCount) =>
+      newLikeStatus ? prevCount + 1 : prevCount - 1
+    );
     setIsLiked(newLikeStatus);
 
-    fetch(`http://localhost:5000/meals/${meal._id}/like`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: user._id, isLiked: newLikeStatus }),
-    });
+    try {
+      await fetch(`http://localhost:5000/meals/${id}/like`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: user._id, isLiked: newLikeStatus }),
+      });
+    } catch (error) {
+      console.error("Error liking meal:", error);
+      setLikeCount((prevCount) =>
+        newLikeStatus ? prevCount - 1 : prevCount + 1
+      );
+      setIsLiked(!newLikeStatus);
+    }
   };
 
   const handleChangeReview = (event) => {
@@ -80,13 +67,16 @@ const MealDetail = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/meals/${meal._id}/reviews`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newReview),
-      });
+      const response = await fetch(
+        `http://localhost:5000/meals/${id}/reviews`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newReview),
+        }
+      );
       const data = await response.json();
       setReviews([...reviews, data]);
       setReview("");
@@ -109,7 +99,7 @@ const MealDetail = () => {
         },
         body: JSON.stringify({
           userId: user._id,
-          mealId: meal._id,
+          mealId: id,
           status: "pending",
         }),
       });
@@ -119,13 +109,8 @@ const MealDetail = () => {
     }
   };
 
- 
-  if (error) {
-    return <div>{error}</div>; // Show error message
-  }
-
   if (!meal) {
-    return <div>Meal not found.</div>; // Show a message if no meal is found
+    return <div>Loading...</div>;
   }
 
   return (
@@ -170,14 +155,16 @@ const MealDetail = () => {
 
               <div className="mt-4">
                 <h3 className="text-lg font-bold mb-2">
-                  Reviews ({Array.isArray(reviews) ? reviews.length : 0})
+                  Reviews ({reviews.length})
                 </h3>
-                {Array.isArray(reviews) && reviews.length === 0 ? (
+                {reviews.length === 0 ? (
                   <p>No reviews yet.</p>
                 ) : (
                   <ul>
-                    {Array.isArray(reviews) && reviews.map((review, index) => (
-                      <li key={index}>{review.text} - {review.userName}</li>
+                    {reviews.map((review, index) => (
+                      <li key={index}>
+                        {review.text} - {review.userName}
+                      </li>
                     ))}
                   </ul>
                 )}
@@ -210,7 +197,8 @@ const MealDetail = () => {
                 </button>
                 {requestSubmitted && (
                   <p className="mt-2 text-green-600">
-                    Your meal request has been submitted and is pending approval.
+                    Your meal request has been submitted and is pending
+                    approval.
                   </p>
                 )}
               </div>

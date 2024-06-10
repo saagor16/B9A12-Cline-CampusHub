@@ -50,10 +50,10 @@ export const router = createBrowserRouter([
         element: <UpcomingMeals />,
       },
       {
-        path: "/meal/:id",
+        path: "/single/:id",
         element: <MealDetail />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/meals/${params.id}`),
+          fetch(`http://localhost:5000/meals/${params._id}`),
       },
       {
         path: '/payment/:packageName',

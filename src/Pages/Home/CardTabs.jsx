@@ -14,7 +14,7 @@ const CardTabs = ({ item }) => {
       <h3 className="text-lg font-semibold mb-2">{title}</h3>
       <p className="mb-1">Rating: {rating}</p>
       <p className="mb-2">Price: ${price}</p>
-      <Link to={`/meal/${_id}`}> {/* Specify the destination URL */}
+      <Link to={`/single/${_id}`}> {/* Specify the destination URL */}
         <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">
           Details
         </button>
