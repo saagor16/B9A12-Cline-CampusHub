@@ -31,6 +31,11 @@ const Home = () => {
       <div>
         <Slider />
       </div>
+      <div className='mt-10 items-center container mx-auto text-center'>
+        <h1 className='font-bold text-3xl pb-5'>Welcome to Meals by Category</h1>
+        <p className='text-xl'>Select a category to see the meals.</p>
+      </div>
+
       <div className="mt-10 container mx-auto">
         <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
           <TabList className="flex border-b">

@@ -5,7 +5,7 @@ const CardTabs = ({ item }) => {
   const { _id, image, title, rating, price } = item;
 
   return (
-    <div className="border rounded-lg p-4 shadow-md text-center">
+    <div className="border rounded-lg p-4 mt-10 shadow-md text-center">
       <img
         src={image}
         alt={title}
