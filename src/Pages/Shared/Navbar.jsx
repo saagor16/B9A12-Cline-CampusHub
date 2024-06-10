@@ -50,7 +50,7 @@ function Navbar() {
             <Link
                 to='/'
                 onClick={() => handleLinkClick('Home')}
-                className={`px-3 py-2 mx-3 mt-2 transition-colors duration-300 transform rounded-md lg:mt-0 lg:text-black text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 ${activeLink === 'Home' ? 'bg-green-500' : ''}`}
+                className={`px-3 py-2 mx-3 mt-2 transition-colors duration-300 transform rounded-md lg:mt-0 lg:text-orange-800 text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 ${activeLink === 'Home' ? 'bg-green-500' : ''}`}
             >
                 Home
             </Link>

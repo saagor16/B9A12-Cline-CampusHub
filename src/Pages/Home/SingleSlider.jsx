@@ -7,10 +7,10 @@ const SingleSlider = ({ image, title, description }) => {
           <div className="max-w-md px-4">
             <h1 className="mb-4 text-4xl md:text-5xl lg:text-6xl font-bold">{title}</h1>
             <p className="mb-4 text-sm md:text-base lg:text-lg">{description}</p>
-            <div className="mb-4 flex flex-col md:flex-row items-stretch">
-              <input type="text" placeholder="Search..." className="input input-bordered mb-2 md:mb-0 md:mr-2" />
-              <button className="btn btn-primary">Search</button>
-            </div>
+            <div className="flex flex-col items-center w-full">
+            <input type="text" placeholder="Search..." className="input input-bordered mb-2 w-full" />
+            <button className="btn btn-outline btn-secondary w-full">Search</button>
+          </div>
           </div>
         </div>
       </div>
