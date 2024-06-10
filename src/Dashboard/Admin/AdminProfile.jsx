@@ -1,30 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { FaGithub, FaDribbble, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import useMeals from "../../Hooks/useMeals";
 
 const AdminProfile = () => {
   const { user, userProfile } = useContext(AuthContext);
-  const [mealCount, setMealCount] = useState(0);
-
-  useEffect(() => {
-    if (user) {
-      fetchMealCount(user.email);
-    }
-  }, [user]);
-
-  const fetchMealCount = async (email) => {
-    try {
-      const response = await fetch(`http://localhost:5000/meals/count?adminEmail=${email}`);
-      const data = await response.json();
-      if (response.ok) {
-        setMealCount(data.count);
-      } else {
-        throw new Error(data.message);
-      }
-    } catch (error) {
-      console.error("Error fetching meal count:", error);
-    }
-  };
+  const [meal]=useMeals()
+  console.log(meal)
+  
 
   const handleUserProfile = async () => {
     userProfile();
@@ -55,7 +38,7 @@ const AdminProfile = () => {
               ))}
             </div>
             <div className="text-center mt-6">
-              <h3 className="text-xl font-semibold">Meals Added: {mealCount}</h3>
+              <h3 className="text-xl font-semibold">Meals Added: {meal.length}</h3>
             </div>
           </div>
           <div className="flex justify-center p-6 space-x-4 align-center bg-gray-50">
