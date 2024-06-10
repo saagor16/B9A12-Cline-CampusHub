@@ -20,6 +20,7 @@ import AllReviews from "../Dashboard/Admin/AllReviews";
 import ServeMeals from "../Dashboard/Admin/ServeMeals";
 import PrivateRoute from "../Pages/PrivateRoute/PrivateRoute";
 import AllUsers from "../Dashboard/Admin/AllUsers";
+import Payment from "../Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
         element: <MealDetail />,
       },
       {
+        path: '/payment/:packageName',
+        element: <Payment></Payment>
+      },
+      {
         path: "/dashboard",
         element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
@@ -72,6 +77,7 @@ export const router = createBrowserRouter([
             path: "paymentHistory",
             element: <PaymentHistory />,
           },
+
           // Admin routes
           {
             path: "adminProfile",

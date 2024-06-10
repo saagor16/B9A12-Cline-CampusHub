@@ -6,6 +6,7 @@ import useMeals from '../../Hooks/useMeals';
 import { useParams } from 'react-router';
 import CardTabs from './CardTabs';
 import Extra from './Extra';
+import MembershipSection from './MembershipSection';
 
 const Home = () => {
   const categories = ['breakfast', 'lunch', 'dinner', 'all'];
@@ -100,6 +101,9 @@ const Home = () => {
       </div>
       <div className='mt-10'>
         <Extra></Extra>
+      </div>
+      <div className='mt-10'>
+        <MembershipSection></MembershipSection>
       </div>
     </div>
   );
