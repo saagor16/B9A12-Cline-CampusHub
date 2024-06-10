@@ -52,7 +52,7 @@ const AllMeals = () => {
                   {meal.adminName}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <Link to={`/meal/${meal._id}`}>
+                  <Link to={`/single/${meal._id}`}>
                     {" "}
                     {/* Specify the destination URL */}
                     <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">
