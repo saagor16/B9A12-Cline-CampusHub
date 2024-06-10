@@ -17,7 +17,7 @@ const MembershipSection = () => {
   };
 
   return (
-    <div className="flex justify-center items-center container mx-auto h-[260px] rounded-xl bg-gradient-to-br from-purple-400 to-pink-600">
+    <div className="flex justify-center items-center container mx-auto h-[260px] rounded-xl bg-gradient-to-br from-purple-400 to-pink-600 mt-24 lg:mt-10">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 hover:text-white">
         {packages.map((pkg, index) => (
           <div

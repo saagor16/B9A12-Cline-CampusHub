@@ -52,6 +52,8 @@ export const router = createBrowserRouter([
       {
         path: "/meal/:id",
         element: <MealDetail />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/meals/${params.id}`),
       },
       {
         path: '/payment/:packageName',
@@ -98,15 +100,15 @@ export const router = createBrowserRouter([
           },
           {
             path: "serveMeals",
-            element:<ServeMeals />,
+            element:<AdminRoute><ServeMeals></ServeMeals></AdminRoute>,
           },
           {
             path: "allUser",
-            element: <AllUsers />,
+            element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
           },
           {
             path: "upAdmin",
-            element:<UpAdminMeals></UpAdminMeals>,
+            element:<AdminRoute><UpAdminMeals></UpAdminMeals></AdminRoute>,
           },
         ],
       },
