@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
         path: "/single/:id",
         element: <MealDetail />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/meals/${params._id}`),
+          fetch(`http://localhost:5000/meals/${params.id}`),
       },
       {
         path: '/payment/:packageName',

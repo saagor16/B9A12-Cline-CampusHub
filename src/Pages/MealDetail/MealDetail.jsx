@@ -15,7 +15,7 @@ const MealDetail = () => {
   const [requestSubmitted, setRequestSubmitted] = useState(false);
 
 
-  console.log(meal)
+  console.log(meal);
 
   const handleLike = async () => {
     if (!user) {
